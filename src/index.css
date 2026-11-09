@@ -1,0 +1,196 @@
+@import "tailwindcss";
+
+:root {
+  --color-bg-deep: #0b0b0c;
+  --color-bg-surface: #111113;
+  --color-bg-card: #151518;
+  --color-bg-card-hover: #1a1a1e;
+
+  --gold-primary: #c5a059;
+  --gold-light: #e6ce9c;
+  --gold-muted: #8e7443;
+  --gold-subtle: rgba(197, 160, 89, 0.12);
+
+  --text-primary: #f5f5f7;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-gold-subtle: rgba(197, 160, 89, 0.22);
+  --border-gold-hover: rgba(197, 160, 89, 0.45);
+
+  --font-arabic: 'Cairo', system-ui, sans-serif;
+  --font-brand: 'Cinzel', serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--color-bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font-arabic);
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--color-bg-deep);
+  background-image: radial-gradient(circle at 50% -10%, rgba(197, 160, 89, 0.06), transparent 50%);
+  color: var(--text-primary);
+}
+
+/* Custom Scrollbar - Minimal & Discrete */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0b0b0c;
+}
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-primary);
+}
+
+/* Fonts */
+.font-brand {
+  font-family: var(--font-brand);
+  letter-spacing: 0.05em;
+}
+
+/* Chic Gold Text */
+.text-gold-chic {
+  color: var(--gold-primary);
+}
+
+.text-gold-gradient {
+  background: linear-gradient(135deg, #f0dfb8 0%, #c5a059 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Calm Luxury Cards */
+.chic-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
+}
+
+.chic-card:hover {
+  border-color: var(--border-gold-subtle);
+  background: var(--color-bg-card-hover);
+}
+
+/* Classic Menu Dotted Leader Line */
+.dotted-leader {
+  flex-grow: 1;
+  border-bottom: 1px dotted rgba(255, 255, 255, 0.18);
+  height: 1px;
+  margin: 0 16px;
+  position: relative;
+  top: -4px;
+}
+
+/* Buttons - Sleek & Calm */
+.btn-gold {
+  background: linear-gradient(135deg, #d8b772 0%, #c5a059 100%);
+  color: #0b0b0c;
+  font-weight: 700;
+  border-radius: 9999px;
+  padding: 10px 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.btn-gold:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.btn-outline-gold {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-primary);
+  font-weight: 600;
+  border: 1px solid var(--border-subtle);
+  border-radius: 9999px;
+  padding: 9px 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 13.5px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-outline-gold:hover {
+  border-color: var(--gold-primary);
+  color: var(--gold-light);
+  background: rgba(197, 160, 89, 0.08);
+}
+
+/* Modals Overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.modal-content {
+  background: #131316;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+  max-height: 90vh;
+  overflow-y: auto;
+  width: 100%;
+}
+
+/* Category Horizontal Scroll Bar */
+.category-scroll-container {
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  white-space: nowrap;
+}
+.category-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Container */
+.container-custom {
+  max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+@media (max-width: 640px) {
+  .container-custom {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+}
