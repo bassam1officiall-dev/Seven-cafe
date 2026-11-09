@@ -1,0 +1,1803 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>7 SEVEN — Specialty Coffee & Kitchen</title>
+  <meta name="description" content="7 SEVEN Specialty Coffee & Kitchen — El-Badrashein, Giza. Editorial digital menu.">
+
+  <!-- Typefaces: Cormorant Garamond (Editorial Display) + Inter (Sans) + Cairo (Arabic Display & Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. DESIGN TOKENS
+       ========================================================================== */
+    :root {
+      --color-bg: #111112;
+      --color-surface: #171719;
+      --color-text: #f0eee9;
+      --color-muted: #88847c;
+      --color-accent: #c29d68;
+      --color-accent-subtle: rgba(194, 157, 104, 0.12);
+      --color-border: rgba(240, 238, 233, 0.09);
+      --color-border-strong: rgba(240, 238, 233, 0.18);
+
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-arabic: 'Cairo', -apple-system, BlinkMacSystemFont, sans-serif;
+
+      --container-width: 1080px;
+      --header-height: 64px;
+      --nav-height: 52px;
+    }
+
+    /* ==========================================================================
+       2. RESET & BASE
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-arabic);
+      font-size: 15px;
+      line-height: 1.7;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+
+    a:hover {
+      opacity: 0.7;
+    }
+
+    button {
+      background: none;
+      border: none;
+      color: inherit;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container-width);
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    /* ==========================================================================
+       3. SITE HEADER
+       ========================================================================== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(17, 17, 18, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--color-border);
+      height: var(--header-height);
+    }
+
+    .header-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-wordmark {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .brand-name {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--color-text);
+      line-height: 1;
+    }
+
+    .brand-branch {
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      color: var(--color-muted);
+      font-weight: 500;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 0.82rem;
+    }
+
+    .action-link {
+      color: var(--color-muted);
+      transition: color 0.2s ease;
+    }
+
+    .action-link:hover {
+      color: var(--color-text);
+      opacity: 1;
+    }
+
+    .order-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border: 1px solid var(--color-border-strong);
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.78rem;
+      color: var(--color-text);
+      transition: border-color 0.2s ease;
+    }
+
+    .order-status:hover {
+      border-color: var(--color-accent);
+      opacity: 1;
+    }
+
+    .order-count {
+      color: var(--color-accent);
+      font-family: var(--font-body);
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       4. EDITORIAL HERO
+       ========================================================================== */
+    .editorial-hero {
+      padding: 56px 0 36px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .hero-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .hero-title-group {
+      max-width: 580px;
+    }
+
+    .hero-label {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--color-accent);
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+
+    .hero-heading {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      line-height: 1.15;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      color: var(--color-text);
+      margin-bottom: 12px;
+    }
+
+    .hero-lead {
+      font-size: 0.95rem;
+      color: var(--color-muted);
+      line-height: 1.7;
+    }
+
+    .hero-sidebar {
+      text-align: left;
+      font-size: 0.8rem;
+      color: var(--color-muted);
+      line-height: 1.8;
+      border-right: 1px solid var(--color-border);
+      padding-right: 20px;
+    }
+
+    .sidebar-row {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+    }
+
+    .sidebar-label {
+      color: var(--color-muted);
+    }
+
+    .sidebar-value {
+      color: var(--color-text);
+      font-weight: 500;
+    }
+
+    /* ==========================================================================
+       5. CATEGORY NAVIGATION (MINIMAL UNDERLINE TABS)
+       ========================================================================== */
+    .category-nav-wrapper {
+      position: sticky;
+      top: var(--header-height);
+      z-index: 40;
+      background: rgba(17, 17, 18, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .category-nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding: 0 4px;
+      height: var(--nav-height);
+    }
+
+    .category-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .category-tab {
+      display: inline-block;
+      white-space: nowrap;
+      font-size: 0.86rem;
+      font-weight: 500;
+      color: var(--color-muted);
+      position: relative;
+      height: var(--nav-height);
+      line-height: var(--nav-height);
+      border-bottom: 2px solid transparent;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .category-tab:hover {
+      color: var(--color-text);
+    }
+
+    .category-tab.active {
+      color: var(--color-text);
+      font-weight: 600;
+      border-bottom-color: var(--color-accent);
+    }
+
+    .category-tab-en {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      color: var(--color-muted);
+      margin-right: 4px;
+    }
+
+    /* ==========================================================================
+       6. EDITORIAL MENU LIST
+       ========================================================================== */
+    .menu-main {
+      padding: 48px 0 80px;
+      flex-grow: 1;
+    }
+
+    .menu-category {
+      margin-bottom: 64px;
+      scroll-margin-top: calc(var(--header-height) + var(--nav-height) + 24px);
+    }
+
+    .category-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--color-border-strong);
+      padding-bottom: 12px;
+      margin-bottom: 28px;
+    }
+
+    .category-title {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--color-text);
+    }
+
+    .category-title-en {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      color: var(--color-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .category-notes {
+      font-size: 0.85rem;
+      color: var(--color-muted);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    /* Sub-tabs for Feteer */
+    .sub-tabs {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: 8px;
+    }
+
+    .sub-tab-btn {
+      font-size: 0.82rem;
+      color: var(--color-muted);
+      padding-bottom: 6px;
+      border-bottom: 1.5px solid transparent;
+      transition: all 0.15s ease;
+    }
+
+    .sub-tab-btn.active {
+      color: var(--color-text);
+      font-weight: 600;
+      border-bottom-color: var(--color-accent);
+    }
+
+    /* Editorial Two-Column Grid */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      row-gap: 22px;
+      column-gap: 56px;
+    }
+
+    @media (min-width: 768px) {
+      .menu-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .menu-item {
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .item-top {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 4px;
+    }
+
+    .item-title-group {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .item-name {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-text);
+      letter-spacing: -0.01em;
+    }
+
+    .item-name-en {
+      font-family: var(--font-body);
+      font-size: 0.74rem;
+      color: var(--color-muted);
+      font-weight: 400;
+    }
+
+    .item-price {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      white-space: nowrap;
+      display: flex;
+      align-items: baseline;
+      gap: 3px;
+    }
+
+    .currency {
+      font-size: 0.72rem;
+      color: var(--color-muted);
+      font-family: var(--font-arabic);
+      font-weight: 400;
+    }
+
+    .item-desc {
+      font-size: 0.82rem;
+      color: var(--color-muted);
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+
+    .item-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 2px;
+    }
+
+    .btn-add {
+      font-size: 0.74rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--color-muted);
+      padding: 3px 10px;
+      border: 1px solid var(--color-border);
+      border-radius: 2px;
+      transition: all 0.15s ease;
+    }
+
+    .btn-add:hover {
+      color: var(--color-text);
+      border-color: var(--color-accent);
+      background: var(--color-accent-subtle);
+      opacity: 1;
+    }
+
+    /* ==========================================================================
+       7. MATCH NIGHT / SEATING NOTE (NON-INTRUSIVE)
+       ========================================================================== */
+    .editorial-notice {
+      margin: 48px 0;
+      padding: 24px 28px;
+      border-left: 2px solid var(--color-accent);
+      background: var(--color-surface);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .notice-text h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 4px;
+    }
+
+    .notice-text p {
+      font-size: 0.82rem;
+      color: var(--color-muted);
+    }
+
+    .notice-link {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      border-bottom: 1px solid var(--color-accent);
+      padding-bottom: 2px;
+    }
+
+    /* ==========================================================================
+       8. BOTTOM DRAWER / ORDER TRAY
+       ========================================================================== */
+    .order-tray {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 60;
+      background: rgba(17, 17, 18, 0.97);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--color-border-strong);
+      padding: 12px 0;
+      transform: translateY(120%);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .order-tray.visible {
+      transform: translateY(0);
+    }
+
+    .tray-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .tray-summary {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .tray-count {
+      font-size: 0.85rem;
+      color: var(--color-muted);
+    }
+
+    .tray-total {
+      font-family: var(--font-body);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--color-accent);
+    }
+
+    .btn-checkout {
+      background: var(--color-accent);
+      color: #0d0d0e;
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      padding: 9px 20px;
+      border-radius: 2px;
+      transition: opacity 0.2s ease;
+    }
+
+    .btn-checkout:hover {
+      opacity: 0.9;
+    }
+
+    /* ==========================================================================
+       9. MODAL DIALOGS
+       ========================================================================== */
+    .dialog-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .dialog-backdrop.open {
+      display: flex;
+    }
+
+    .dialog-window {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border-strong);
+      border-radius: 4px;
+      max-width: 440px;
+      width: 100%;
+      padding: 24px;
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+
+    .dialog-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--color-border);
+      margin-bottom: 18px;
+    }
+
+    .dialog-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    .dialog-close {
+      color: var(--color-muted);
+      font-size: 1.2rem;
+      line-height: 1;
+      padding: 4px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--color-muted);
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    .form-input, .form-select {
+      width: 100%;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      color: var(--color-text);
+      font-family: inherit;
+      font-size: 0.85rem;
+      padding: 9px 12px;
+      border-radius: 2px;
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+
+    .form-input:focus, .form-select:focus {
+      border-color: var(--color-accent);
+    }
+
+    .cart-item-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--color-border);
+      font-size: 0.85rem;
+    }
+
+    .cart-item-remove {
+      color: var(--color-muted);
+      font-size: 0.72rem;
+      margin-right: 8px;
+      text-decoration: underline;
+    }
+
+    /* ==========================================================================
+       10. MINIMAL FOOTER
+       ========================================================================== */
+    .site-footer {
+      border-top: 1px solid var(--color-border);
+      padding: 40px 0;
+      font-size: 0.78rem;
+      color: var(--color-muted);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    @media (min-width: 640px) {
+      .footer-grid {
+        grid-template-columns: 2fr 1fr 1fr;
+      }
+    }
+
+    .footer-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: var(--color-text);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .footer-col p {
+      line-height: 1.8;
+    }
+
+    .footer-links {
+      list-style: none;
+      line-height: 2;
+    }
+
+    .footer-links a {
+      color: var(--color-muted);
+      border-bottom: 1px solid transparent;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-text);
+      border-bottom-color: var(--color-text);
+      opacity: 1;
+    }
+
+    /* ==========================================================================
+       11. RESPONSIVE BREAKPOINTS
+       ========================================================================== */
+    @media (max-width: 640px) {
+      .hero-heading {
+        font-size: 2.1rem;
+      }
+      .category-header {
+        flex-direction: column;
+        gap: 4px;
+      }
+      .editorial-hero {
+        padding: 36px 0 24px;
+      }
+      .hero-sidebar {
+        border-right: none;
+        padding-right: 0;
+        text-align: right;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+      .sidebar-row {
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. MINIMAL SITE HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      
+      <div class="brand-wordmark">
+        <span class="brand-name">7 SEVEN</span>
+        <span class="brand-branch">فرع البدرشين</span>
+      </div>
+
+      <div class="header-actions">
+        <a href="tel:01128586856" class="action-link" dir="ltr">01128586856</a>
+        <button id="openReservationBtn" class="action-link">حجز طاولة</button>
+        <button id="openCartBtn" class="order-status">
+          <span>الطلب</span>
+          <span id="headerCartCount" class="order-count">0</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- 2. EDITORIAL HERO -->
+  <section class="editorial-hero">
+    <div class="container hero-meta">
+      <div class="hero-title-group">
+        <div class="hero-label">Specialty Coffee & Kitchen</div>
+        <h1 class="hero-heading">أقوى قعدة أوت دور ومتابعة للمباريات</h1>
+        <p class="hero-lead">
+          مساحة خارجية هادئة في الهواء الطلق، شاشات عرض مباشرة، ودفايات شتوية، مع تشكيلة من القهوة المختصة والفطائر والبيتزا.
+        </p>
+      </div>
+
+      <div class="hero-sidebar">
+        <div class="sidebar-row">
+          <span class="sidebar-label">الموقع:</span>
+          <span class="sidebar-value">البدرشين، الجيزة</span>
+        </div>
+        <div class="sidebar-row">
+          <span class="sidebar-label">المواعيد:</span>
+          <span class="sidebar-value">09:00 ص – 02:00 ص</span>
+        </div>
+        <div class="sidebar-row">
+          <span class="sidebar-label">الخدمة:</span>
+          <span class="sidebar-value">صالة أوت دور • تيك أواي</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. STICKY CATEGORY NAVIGATION (UNDERLINE ONLY, ZERO EMOJIS) -->
+  <nav class="category-nav-wrapper" aria-label="أقسام المنيو">
+    <div class="container">
+      <div class="category-nav" id="categoryNav">
+        <a href="#hot-drinks" class="category-tab active" data-target="hot-drinks">
+          <span>المشروبات الساخنة</span>
+          <span class="category-tab-en">Hot</span>
+        </a>
+        <a href="#winter-special" class="category-tab" data-target="winter-special">
+          <span>مشروبات الشتاء</span>
+          <span class="category-tab-en">Winter</span>
+        </a>
+        <a href="#cold-drinks" class="category-tab" data-target="cold-drinks">
+          <span>المشروبات الباردة</span>
+          <span class="category-tab-en">Cold</span>
+        </a>
+        <a href="#fresh-juices" class="category-tab" data-target="fresh-juices">
+          <span>العصائر الطبيعية</span>
+          <span class="category-tab-en">Juices</span>
+        </a>
+        <a href="#smoothies" class="category-tab" data-target="smoothies">
+          <span>السموذي</span>
+          <span class="category-tab-en">Smoothies</span>
+        </a>
+        <a href="#milkshakes" class="category-tab" data-target="milkshakes">
+          <span>الميلك تشيك</span>
+          <span class="category-tab-en">Shakes</span>
+        </a>
+        <a href="#frappe" class="category-tab" data-target="frappe">
+          <span>الفرابيه</span>
+          <span class="category-tab-en">Frappé</span>
+        </a>
+        <a href="#food-pizza" class="category-tab" data-target="food-pizza">
+          <span>البيتزا والمأكولات</span>
+          <span class="category-tab-en">Food</span>
+        </a>
+        <a href="#feteer" class="category-tab" data-target="feteer">
+          <span>الفطائر والمشلتت</span>
+          <span class="category-tab-en">Pies</span>
+        </a>
+        <a href="#platters" class="category-tab" data-target="platters">
+          <span>الأطباق والتسالي</span>
+          <span class="category-tab-en">Bowls</span>
+        </a>
+        <a href="#addons" class="category-tab" data-target="addons">
+          <span>الإضافات</span>
+          <span class="category-tab-en">Extras</span>
+        </a>
+        <a href="#shisha" class="category-tab" data-target="shisha">
+          <span>الشيشة</span>
+          <span class="category-tab-en">Lounge</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 4. EDITORIAL MENU CONTENT -->
+  <main class="menu-main">
+    <div class="container">
+
+      <!-- SECTION: HOT DRINKS -->
+      <section id="hot-drinks" class="menu-category">
+        <header class="category-header">
+          <h2 class="category-title">المشروبات الساخنة</h2>
+          <span class="category-title-en">Hot Coffee & Tea</span>
+        </header>
+        <p class="category-notes">معدّة بأجود حبوب البن المحمصة وحليب مبخر طازج.</p>
+
+        <div class="menu-grid">
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">قهوة سنجل</span>
+                <span class="item-name-en">Single Turkish Coffee</span>
+              </div>
+              <span class="item-price">30 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">بن برازيلي فاخر محوج أو سادة مع رغوة متماسكة.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('قهوة سنجل', 30)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">قهوة دابل</span>
+                <span class="item-name-en">Double Turkish Coffee</span>
+              </div>
+              <span class="item-price">45 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">جرعة مضاعفة من القهوة التركية الغنية.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('قهوة دابل', 45)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">اسبريسو سنجل</span>
+                <span class="item-name-en">Single Espresso</span>
+              </div>
+              <span class="item-price">35 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">شوت مركز مستخلص بعناية مع كريما ذهبية كثيفة.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('اسبريسو سنجل', 35)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">اسبريسو دابل</span>
+                <span class="item-name-en">Double Espresso</span>
+              </div>
+              <span class="item-price">50 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">دبل شوت اسبريسو متوازن المذاق والقوام.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('اسبريسو دابل', 50)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">فلات وايت</span>
+                <span class="item-name-en">Flat White</span>
+              </div>
+              <span class="item-price">60 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">ريستريتو مزدوج مع حليب مخملي بطبقة ميكروفوم دقيقة.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('فلات وايت', 60)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">كابتشينو</span>
+                <span class="item-name-en">Cappuccino</span>
+              </div>
+              <span class="item-price">60 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">نسب متساوية من الاسبريسو، الحليب المبخر وفوم الحليب الناعم.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('كابتشينو', 60)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">لاتيه</span>
+                <span class="item-name-en">Café Latte</span>
+              </div>
+              <span class="item-price">60 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">اسبريسو كلاسيكي مع حليب ساخن غني وطبقة فوم خفيفة.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('لاتيه', 60)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">سبانش لاتيه ساخن</span>
+                <span class="item-name-en">Spanish Latte</span>
+              </div>
+              <span class="item-price">70 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">اسبريسو مع الحليب المكثف المحلى لمذاق كريمي هادئ.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('سبانش لاتيه ساخن', 70)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">أمريكان كوفي</span>
+                <span class="item-name-en">Americano</span>
+              </div>
+              <span class="item-price">45 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">اسبريسو مخفف بماء ساخن نقي لقوام خفيف ونكهة واضحة.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('أمريكان كوفي', 45)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">هوت موكا</span>
+                <span class="item-name-en">Café Mocha</span>
+              </div>
+              <span class="item-price">70 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">مزيج الاسبريسو مع صوص الشوكولاتة الداكنة والحليب.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('هوت موكا', 70)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">هوت شوكليت</span>
+                <span class="item-name-en">Hot Chocolate</span>
+              </div>
+              <span class="item-price">65 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">كاكاو بلجيكي مركز مع الحليب المبخر وفوم الكريمة.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('هوت شوكليت', 65)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">هوت سيدر</span>
+                <span class="item-name-en">Spiced Apple Cider</span>
+              </div>
+              <span class="item-price">55 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">عصير تفاح دافئ متبل بأعواد القرفة الطبيعية.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('هوت سيدر', 55)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">قهوة بندق</span>
+                <span class="item-name-en">Hazelnut Coffee</span>
+              </div>
+              <span class="item-price">50 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">قهوة تركي بنكهة البندق الفرنسي المحمص.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('قهوة بندق', 50)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">قهوة فرنساوي</span>
+                <span class="item-name-en">French Coffee</span>
+              </div>
+              <span class="item-price">50 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">قهوة محضرة بالحليب الطازج بدلاً من الماء على الطريقة الكلاسيكية.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('قهوة فرنساوي', 50)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">شاي كلاسيك</span>
+                <span class="item-name-en">Black Tea</span>
+              </div>
+              <span class="item-price">20 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">أوراق شاي أسود نقية بالنعناع البلدي أو سادة.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('شاي كلاسيك', 20)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">براد شاي</span>
+                <span class="item-name-en">Tea Pot</span>
+              </div>
+              <span class="item-price">50 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">براد شاي تقليدي مخصص للجلسات الطويلة.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('براد شاي', 50)">إضافة</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- SECTION: WINTER SPECIALS -->
+      <section id="winter-special" class="menu-category">
+        <header class="category-header">
+          <h2 class="category-title">مشروبات الشتاء</h2>
+          <span class="category-title-en">Winter Warmers</span>
+        </header>
+        <p class="category-notes">مشروبات موسمية دافئة مخصصة للأجواء الباردة في القعدة الخارجية.</p>
+
+        <div class="menu-grid">
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">سحلب مكسرات</span>
+                <span class="item-name-en">Sahlab with Nuts</span>
+              </div>
+              <span class="item-price">65 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">سحلب بلدي كثيف القوام مع كاجو، بندق، زبيب، وقرفة مطحونة.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('سحلب مكسرات', 65)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">سحلب سادة</span>
+                <span class="item-name-en">Classic Sahlab</span>
+              </div>
+              <span class="item-price">50 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">سحلب ناعم بالحليب ورشة قرفة خفيفة.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('سحلب سادة', 50)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">أوريو ساخن</span>
+                <span class="item-name-en">Warm Oreo Blend</span>
+              </div>
+              <span class="item-price">65 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">بسكويت أوريو مخفوق بالحليب الساخن وصوص الشوكولاتة.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('أوريو ساخن', 65)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">حمص الشام</span>
+                <span class="item-name-en">Hummus El Sham</span>
+              </div>
+              <span class="item-price">40 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">حلبسة مصرية دافئة بعصير الليمون والكمون والشطة الخفيفة.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('حمص الشام', 40)">إضافة</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- SECTION: COLD DRINKS -->
+      <section id="cold-drinks" class="menu-category">
+        <header class="category-header">
+          <h2 class="category-title">المشروبات الباردة</h2>
+          <span class="category-title-en">Iced Coffee & Refreshers</span>
+        </header>
+
+        <div class="menu-grid">
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">ايس لاتيه</span>
+                <span class="item-name-en">Iced Latte</span>
+              </div>
+              <span class="item-price">65 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">اسبريسو مستخلص فوق ثلج وحليب مبرد متوازن.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('ايس لاتيه', 65)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">ايس سبانش لاتيه</span>
+                <span class="item-name-en">Iced Spanish Latte</span>
+              </div>
+              <span class="item-price">75 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">حليب مكثف مع اسبريسو وقطع ثلج مجروشة.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('ايس سبانش لاتيه', 75)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">ايس أمريكانو</span>
+                <span class="item-name-en">Iced Americano</span>
+              </div>
+              <span class="item-price">50 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">دبل اسبريسو نقي مبرد بالماء والثلج.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('ايس أمريكانو', 50)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">ايس وايت موكا</span>
+                <span class="item-name-en">Iced White Mocha</span>
+              </div>
+              <span class="item-price">75 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">شوكولاتة بيضاء ناعمة مع اسبريسو وحليب مبرد.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('ايس وايت موكا', 75)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">موخيتو كلاسيك</span>
+                <span class="item-name-en">Classic Mojito</span>
+              </div>
+              <span class="item-price">55 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">ليمون أخضر ونعناع طازج مع صودا فوارة وثلج مجروش.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('موخيتو كلاسيك', 55)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">بلو موخيتو</span>
+                <span class="item-name-en">Blue Mojito</span>
+              </div>
+              <span class="item-price">60 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">نكهة الكوراساو المنعشة مع النعناع والليمون والصودا.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('بلو موخيتو', 60)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">بيناكولادا</span>
+                <span class="item-name-en">Piña Colada</span>
+              </div>
+              <span class="item-price">70 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">عصير أناناس طبيعي مع حليب جوز الهند المبرد.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('بيناكولادا', 70)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">ميكس بيري كولد</span>
+                <span class="item-name-en">Mixed Berry Fizz</span>
+              </div>
+              <span class="item-price">65 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">توت بري مشكل مع الصودا والليمون.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('ميكس بيري كولد', 65)">إضافة</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- EDITORIAL NOTICE: OUTDOOR SCREENING -->
+      <aside class="editorial-notice">
+        <div class="notice-text">
+          <h3>شاشة العرض الأوت دور للمباريات</h3>
+          <p>بث مباشر لقمة المباريات والبطولات المحلية والأوروبية في الحديقة الخارجية مع دفايات شتوية.</p>
+        </div>
+        <button class="notice-link" onclick="openReservationModal()">احجز طاولة مبكراً &larr;</button>
+      </aside>
+
+      <!-- SECTION: FOOD & PIZZA -->
+      <section id="food-pizza" class="menu-category">
+        <header class="category-header">
+          <h2 class="category-title">البيتزا والمأكولات</h2>
+          <span class="category-title-en">Pizza & Kitchen</span>
+        </header>
+        <p class="category-notes">عجينة تخمير بطيء محضرة يومياً مع جبنة موتزاريلا طبيعية.</p>
+
+        <div class="menu-grid">
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">بيتزا مارجريتا</span>
+                <span class="item-name-en">Margherita Pizza</span>
+              </div>
+              <span class="item-price">85 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">صلصة طماطم إيطالية، موتزاريلا وفيرة، ريحان وزيت زيتون بكر.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('بيتزا مارجريتا', 85)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">تشيكن رانش</span>
+                <span class="item-name-en">Chicken Ranch</span>
+              </div>
+              <span class="item-price">110 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">دجاج متبل مشوي مع صوص الرانش الغني والجبنة الموتزاريلا.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('تشيكن رانش', 110)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">سجق كيري</span>
+                <span class="item-name-en">Sausage & Kiri</span>
+              </div>
+              <span class="item-price">105 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">سجق شرقي بلدي مع قطع جبنة كيري الكريمية وموتزاريلا.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('سجق كيري', 105)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">بسطرمة كيري</span>
+                <span class="item-name-en">Pastrami & Kiri</span>
+              </div>
+              <span class="item-price">120 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">شرائح بسطرمة بلدي ممتازة مع جبنة كيري وزيتون كالاماتا.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('بسطرمة كيري', 120)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">سوبر سوبريم</span>
+                <span class="item-name-en">Super Supreme</span>
+              </div>
+              <span class="item-price">135 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">سجق، بسطرمة، مشروم طازج، فلفل ألوان، وزيتون مع جبنة مضاعفة.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('سوبر سوبريم', 135)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">مكس جبن وخضروات</span>
+                <span class="item-name-en">Four Cheese & Veggies</span>
+              </div>
+              <span class="item-price">95 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">مزيج شيدر، رومي، موتزاريلا، وكيري مع خضار مشكل طازج.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('مكس جبن وخضروات', 95)">إضافة</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- SECTION: FETEER & PIES -->
+      <section id="feteer" class="menu-category">
+        <header class="category-header">
+          <h2 class="category-title">الفطائر والمشلتت</h2>
+          <span class="category-title-en">Traditional Feteer</span>
+        </header>
+
+        <nav class="sub-tabs" aria-label="أقسام الفطير">
+          <button class="sub-tab-btn active" data-subtab="all">الكل</button>
+          <button class="sub-tab-btn" data-subtab="savory">الحادق</button>
+          <button class="sub-tab-btn" data-subtab="sweet">الحلو</button>
+          <button class="sub-tab-btn" data-subtab="meshaltet">المشلتت الفلاحي</button>
+        </nav>
+
+        <div class="menu-grid" id="feteerGrid">
+          <article class="menu-item" data-type="meshaltet">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">مشلتت فلاحي بلدي</span>
+                <span class="item-name-en">Baladi Ghee Meshaltet</span>
+              </div>
+              <span class="item-price">110 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">فطير مورق بالسمن البلدي الفاخر، يقدم ساخناً مقرمشاً.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('مشلتت فلاحي بلدي', 110)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item" data-type="savory">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">فطيرة سجق كيري</span>
+                <span class="item-name-en">Savory Sausage & Kiri</span>
+              </div>
+              <span class="item-price">115 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">فطير محشو بالسجق الشرقي المتبل وجبنة كيري المورقة.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('فطيرة سجق كيري', 115)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item" data-type="savory">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">فطيرة تشيكن رانش</span>
+                <span class="item-name-en">Savory Chicken Ranch</span>
+              </div>
+              <span class="item-price">120 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">قطع دجاج متبلة مع صوص الرانش وموتزاريلا ذائبة.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('فطيرة تشيكن رانش', 120)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item" data-type="sweet">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">فطيرة قشطة وعسل</span>
+                <span class="item-name-en">Cream & Honey Pie</span>
+              </div>
+              <span class="item-price">85 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">قشطة بلدي طازجة مع عسل نحل صافٍ وسمن بلدي.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('فطيرة قشطة وعسل', 85)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item" data-type="sweet">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">فطيرة فستق لوتس</span>
+                <span class="item-name-en">Pistachio & Lotus Pie</span>
+              </div>
+              <span class="item-price">135 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">زبدة اللوتس مع كريمة الفستق الحلبي المقرمشة.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('فطيرة فستق لوتس', 135)">إضافة</button>
+            </div>
+          </article>
+
+          <article class="menu-item" data-type="sweet">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">فطيرة سكر ولبن</span>
+                <span class="item-name-en">Traditional Sugar & Milk</span>
+              </div>
+              <span class="item-price">55 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">الفطيرة الحلوة الكلاسيكية بالسكر البودرة والحليب المغلي.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('فطيرة سكر ولبن', 55)">إضافة</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- SECTION: SHISHA -->
+      <section id="shisha" class="menu-category">
+        <header class="category-header">
+          <h2 class="category-title">جلسات الشيشة</h2>
+          <span class="category-title-en">Shisha Lounge</span>
+        </header>
+
+        <div class="menu-grid">
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">شيشة فاخر نخب أول</span>
+                <span class="item-name-en">Al Fakher Selected</span>
+              </div>
+              <span class="item-price">65 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">نكهات مختارة على فحم طبيعي بجلسات الحديقة الخارجية.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('شيشة فاخر', 65)">طلب</button>
+            </div>
+          </article>
+
+          <article class="menu-item">
+            <div class="item-top">
+              <div class="item-title-group">
+                <span class="item-name">شيشة معسل سلوم / قص</span>
+                <span class="item-name-en">Classic Salloum & Qas</span>
+              </div>
+              <span class="item-price">45 <span class="currency">ج.م</span></span>
+            </div>
+            <p class="item-desc">المعسل التقليدي الأصيل بجلسة هادئة.</p>
+            <div class="item-actions">
+              <button class="btn-add" onclick="addToCart('شيشة معسل سلوم', 45)">طلب</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- 5. BOTTOM ORDER TRAY -->
+  <aside class="order-tray" id="orderTray" aria-label="ملخص الطلب">
+    <div class="container tray-inner">
+      <div class="tray-summary">
+        <span class="tray-count" id="trayCountText">0 أصناف</span>
+        <span class="tray-total" id="trayTotalText">0 ج.م</span>
+      </div>
+      <button class="btn-checkout" onclick="openCartModal()">إتمام الطلب عبر واتساب &larr;</button>
+    </div>
+  </aside>
+
+  <!-- 6. CART / CHECKOUT DIALOG -->
+  <div class="dialog-backdrop" id="cartDialog" role="dialog" aria-modal="true">
+    <div class="dialog-window">
+      <div class="dialog-header">
+        <h3 class="dialog-title">ملخص الطلب</h3>
+        <button class="dialog-close" onclick="closeCartModal()">&times;</button>
+      </div>
+
+      <div id="cartItemsList" style="margin-bottom: 16px;"></div>
+
+      <div class="form-group">
+        <label class="form-label" for="tableInput">رقم الطاولة (داخل الكافيه أو الجلسة الخارجية):</label>
+        <input type="text" id="tableInput" class="form-input" placeholder="مثال: طاولة 5 أو قعدة الأوت دور">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="notesInput">ملاحظات التحضير (سكر، إضافات):</label>
+        <input type="text" id="notesInput" class="form-input" placeholder="مثال: بدون سكر، تسوية مقرمشة">
+      </div>
+
+      <div style="display: flex; justify-content: space-between; margin-bottom: 16px; font-weight: 600;">
+        <span>المجموع:</span>
+        <span id="dialogTotal" style="color: var(--color-accent);">0 ج.م</span>
+      </div>
+
+      <button class="btn-checkout" style="width: 100%;" onclick="sendWhatsAppOrder()">إرسال الطلب لواتساب الكافيه (01128586856)</button>
+    </div>
+  </div>
+
+  <!-- 7. RESERVATION DIALOG -->
+  <div class="dialog-backdrop" id="reservationDialog" role="dialog" aria-modal="true">
+    <div class="dialog-window">
+      <div class="dialog-header">
+        <h3 class="dialog-title">حجز طاولة</h3>
+        <button class="dialog-close" onclick="closeReservationModal()">&times;</button>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="resName">الاسم:</label>
+        <input type="text" id="resName" class="form-input" placeholder="اسمك الكريم">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="resPhone">الهاتف:</label>
+        <input type="tel" id="resPhone" class="form-input" placeholder="01128586856" dir="ltr">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="resZone">تفضيل الجلسة:</label>
+        <select id="resZone" class="form-select">
+          <option value="شاشة المباريات الأوت دور">أمام شاشة العرض الخارجية للمباريات</option>
+          <option value="الحديقة المفتوحة والنجيل">جلسة الحديقة المفتوحة والنجيل</option>
+          <option value="بجوار الدفايات الشتوية">بجوار الدفايات الشتوية الخارجية</option>
+          <option value="الصالة الداخلية">الصالة الداخلية</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="resCount">عدد الأفراد:</label>
+        <input type="number" id="resCount" class="form-input" value="2" min="1" max="25">
+      </div>
+
+      <button class="btn-checkout" style="width: 100%;" onclick="submitReservation()">تأكيد الحجز عبر واتساب</button>
+    </div>
+  </div>
+
+  <!-- 8. MINIMAL EDITORIAL FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <div class="footer-title">7 SEVEN</div>
+        <p>Specialty Coffee & Kitchen. فرع البدرشين، الجيزة.<br>
+        أقوى قعدة أوت دور في الهواء الطلق ومتابعة حية للمباريات.</p>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">الاتصال</div>
+        <ul class="footer-links">
+          <li><a href="tel:01128586856" dir="ltr">01128586856</a></li>
+          <li><a href="https://wa.me/201128586856" target="_blank" rel="noreferrer">واتساب الكافيه</a></li>
+          <li><a href="mailto:sevencafe2026@gmail.com">sevencafe2026@gmail.com</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">القنوات</div>
+        <ul class="footer-links">
+          <li><a href="https://www.facebook.com/share/p/1A1eoMz9SZ/" target="_blank" rel="noreferrer">Facebook Page</a></li>
+          <li><a href="#hot-drinks">المنيو الكامل</a></li>
+          <li><button onclick="openReservationModal()" style="color: inherit; text-decoration: underline;">طلب حجز طاولة</button></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 9. MINIMAL JAVASCRIPT LOGIC -->
+  <script>
+    // State
+    const cart = [];
+
+    // Category Tabs Smooth Scroll & Active Indicator
+    const tabs = document.querySelectorAll('.category-tab');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+      });
+    });
+
+    // Observer for Active Category on Scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          tabs.forEach(tab => {
+            if (tab.getAttribute('data-target') === id) {
+              tabs.forEach(t => t.classList.remove('active'));
+              tab.classList.add('active');
+            }
+          });
+        }
+      });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.menu-category').forEach(sec => observer.observe(sec));
+
+    // Feteer Sub-tabs
+    const subTabBtns = document.querySelectorAll('.sub-tab-btn');
+    const feteerItems = document.querySelectorAll('#feteerGrid .menu-item');
+
+    subTabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        subTabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.getAttribute('data-subtab');
+
+        feteerItems.forEach(item => {
+          if (filter === 'all' || item.getAttribute('data-type') === filter) {
+            item.style.display = 'flex';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Cart Operations
+    function addToCart(name, price) {
+      const existing = cart.find(i => i.name === name);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ name, price, qty: 1 });
+      }
+      updateCartUI();
+    }
+
+    function removeFromCart(name) {
+      const idx = cart.findIndex(i => i.name === name);
+      if (idx > -1) {
+        cart.splice(idx, 1);
+      }
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const totalCount = cart.reduce((s, i) => s + i.qty, 0);
+      const totalPrice = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+
+      document.getElementById('headerCartCount').textContent = totalCount;
+      document.getElementById('trayCountText').textContent = totalCount + ' أصناف';
+      document.getElementById('trayTotalText').textContent = totalPrice + ' ج.م';
+      document.getElementById('dialogTotal').textContent = totalPrice + ' ج.م';
+
+      const tray = document.getElementById('orderTray');
+      if (totalCount > 0) {
+        tray.classList.add('visible');
+      } else {
+        tray.classList.remove('visible');
+      }
+
+      // Render in dialog
+      const container = document.getElementById('cartItemsList');
+      if (cart.length === 0) {
+        container.innerHTML = '<p style="color: var(--color-muted); font-size: 0.85rem;">لا توجد أصناف في السلة.</p>';
+      } else {
+        container.innerHTML = cart.map(item => `
+          <div class="cart-item-row">
+            <div>
+              <span>${item.qty}× ${item.name}</span>
+              <button class="cart-item-remove" onclick="removeFromCart('${item.name}')">حذف</button>
+            </div>
+            <span>${item.price * item.qty} ج.م</span>
+          </div>
+        `).join('');
+      }
+    }
+
+    // Modal controls
+    function openCartModal() {
+      document.getElementById('cartDialog').classList.add('open');
+    }
+    function closeCartModal() {
+      document.getElementById('cartDialog').classList.remove('open');
+    }
+    function openReservationModal() {
+      document.getElementById('reservationDialog').classList.add('open');
+    }
+    function closeReservationModal() {
+      document.getElementById('reservationDialog').classList.remove('open');
+    }
+
+    document.getElementById('openCartBtn').addEventListener('click', openCartModal);
+    document.getElementById('openReservationBtn').addEventListener('click', openReservationModal);
+
+    // Close modal on backdrop click
+    document.querySelectorAll('.dialog-backdrop').forEach(bg => {
+      bg.addEventListener('click', (e) => {
+        if (e.target === bg) {
+          bg.classList.remove('open');
+        }
+      });
+    });
+
+    // WhatsApp Order Checkout
+    function sendWhatsAppOrder() {
+      if (cart.length === 0) return;
+      const table = document.getElementById('tableInput').value.trim() || 'طاولة الضيف';
+      const notes = document.getElementById('notesInput').value.trim();
+      const total = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+
+      let text = `طلب جديد — 7 SEVEN (فرع البدرشين)\n`;
+      text += `الطاولة: ${table}\n`;
+      text += `--------------------------\n`;
+      cart.forEach((i, idx) => {
+        text += `${idx + 1}. ${i.name} (${i.qty}×) = ${i.price * i.qty} ج.م\n`;
+      });
+      if (notes) {
+        text += `ملاحظات: ${notes}\n`;
+      }
+      text += `--------------------------\n`;
+      text += `الإجمالي: ${total} جنيه مصري\n`;
+
+      window.open(`https://wa.me/201128586856?text=${encodeURIComponent(text)}`, '_blank');
+      closeCartModal();
+    }
+
+    // WhatsApp Reservation
+    function submitReservation() {
+      const name = document.getElementById('resName').value.trim();
+      const phone = document.getElementById('resPhone').value.trim();
+      const zone = document.getElementById('resZone').value;
+      const count = document.getElementById('resCount').value;
+
+      if (!name) {
+        alert('يرجى إدخال الاسم الكريم');
+        return;
+      }
+
+      let text = `طلب حجز طاولة — 7 SEVEN (فرع البدرشين)\n`;
+      text += `الاسم: ${name}\n`;
+      if (phone) text += `الهاتف: ${phone}\n`;
+      text += `عدد الأفراد: ${count}\n`;
+      text += `تفضيل الجلسة: ${zone}\n`;
+
+      window.open(`https://wa.me/201128586856?text=${encodeURIComponent(text)}`, '_blank');
+      closeReservationModal();
+    }
+  </script>
+
+</body>
+</html>

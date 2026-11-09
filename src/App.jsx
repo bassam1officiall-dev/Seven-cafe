@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import MatchSection from './components/MatchSection';
 import CategoryNav from './components/CategoryNav';
 import MenuSection from './components/MenuSection';
 import ItemCustomizerModal from './components/ItemCustomizerModal';
@@ -17,16 +16,7 @@ import {
   INITIAL_MATCH_INFO 
 } from './data/menuData';
 
-import { ShoppingBag } from 'lucide-react';
-import confetti from 'canvas-confetti';
-
 export default function App() {
-  const [lang, setLang] = useState('ar');
-  const [viewMode, setViewMode] = useState(() => {
-    return localStorage.getItem('seven_view_mode') || 'cards';
-  });
-
-  // Items state with localStorage support for Admin price changes
   const [items, setItems] = useState(() => {
     const saved = localStorage.getItem('seven_menu_items');
     if (saved) {
@@ -37,7 +27,6 @@ export default function App() {
     return INITIAL_MENU_ITEMS;
   });
 
-  // Match info with localStorage support
   const [matchInfo, setMatchInfo] = useState(() => {
     const saved = localStorage.getItem('seven_match_info');
     if (saved) {
@@ -48,7 +37,6 @@ export default function App() {
     return INITIAL_MATCH_INFO;
   });
 
-  // Cart state
   const [cartItems, setCartItems] = useState(() => {
     const saved = localStorage.getItem('seven_cart');
     if (saved) {
@@ -59,18 +47,15 @@ export default function App() {
     return [];
   });
 
-  // Navigation and Search state
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Modals state
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isReservationOpen, setIsReservationOpen] = useState(false);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [customizingItem, setCustomizingItem] = useState(null);
   const [waiterOrderData, setWaiterOrderData] = useState(null);
 
-  // Auto-detect table query param (e.g. ?table=5)
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const table = params.get('table');
@@ -79,43 +64,25 @@ export default function App() {
     }
   }, []);
 
-  // Persist items
   useEffect(() => {
     localStorage.setItem('seven_menu_items', JSON.stringify(items));
   }, [items]);
 
-  // Persist cart
   useEffect(() => {
     localStorage.setItem('seven_cart', JSON.stringify(cartItems));
   }, [cartItems]);
 
-  // Persist view mode
-  useEffect(() => {
-    localStorage.setItem('seven_view_mode', viewMode);
-  }, [viewMode]);
-
-  // Persist match info
   useEffect(() => {
     localStorage.setItem('seven_match_info', JSON.stringify(matchInfo));
   }, [matchInfo]);
 
-  // Cart item count & total calculation
   const cartCount = cartItems.reduce((acc, it) => acc + it.quantity, 0);
   const cartTotal = cartItems.reduce((acc, it) => {
     const p = it.calculatedPrice || it.price;
     return acc + p * it.quantity;
   }, 0);
 
-  // Quick add item to cart directly with defaults
   const handleQuickAdd = (item) => {
-    try {
-      confetti({
-        particleCount: 25,
-        spread: 40,
-        origin: { y: 0.85 }
-      });
-    } catch (e) {}
-
     const existingIndex = cartItems.findIndex(
       (ci) => ci.id === item.id && !ci.selectedSugar && (!ci.selectedAddons || ci.selectedAddons.length === 0)
     );
@@ -135,20 +102,10 @@ export default function App() {
     }
   };
 
-  // Add customized item to cart
   const handleAddCustomizedItem = (customItem) => {
-    try {
-      confetti({
-        particleCount: 45,
-        spread: 50,
-        origin: { y: 0.8 }
-      });
-    } catch (e) {}
-
     setCartItems([...cartItems, customItem]);
   };
 
-  // Cart operations
   const handleUpdateQuantity = (cartItemId, newQty) => {
     if (newQty <= 0) {
       handleRemoveItem(cartItemId);
@@ -169,7 +126,6 @@ export default function App() {
     setCartItems([]);
   };
 
-  // Admin Price Update
   const handleUpdateItemPrice = (itemId, newPrice) => {
     setItems((prev) =>
       prev.map((it) => (it.id === itemId ? { ...it, price: newPrice } : it))
@@ -181,95 +137,71 @@ export default function App() {
     localStorage.removeItem('seven_menu_items');
   };
 
-  // Items count by category map for pills
-  const itemsCountByCategory = items.reduce((acc, it) => {
-    acc[it.category] = (acc[it.category] || 0) + 1;
-    return acc;
-  }, {});
-
-  const handleScrollToMenu = () => {
-    const el = document.getElementById('menu-section');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-[#070707] text-[#FFF8E7] flex flex-col selection:bg-[#D4AF37] selection:text-black">
+    <div className="min-h-screen bg-[#111112] text-[#f0eee9] flex flex-col">
       
-      {/* Navbar */}
+      {/* 1. Minimal Header */}
       <Navbar
-        viewMode={viewMode}
-        setViewMode={setViewMode}
         cartCount={cartCount}
-        cartTotal={cartTotal}
         onOpenCart={() => setIsCartOpen(true)}
         onOpenReservation={() => setIsReservationOpen(true)}
         onOpenAdmin={() => setIsAdminOpen(true)}
-        lang={lang}
-        setLang={setLang}
       />
 
-      {/* Hero Banner with Integrated Match Highlight */}
+      {/* 2. Editorial Hero */}
       <Hero
-        matchInfo={matchInfo}
         onOpenReservation={() => setIsReservationOpen(true)}
-        onScrollToMenu={handleScrollToMenu}
-        lang={lang}
       />
 
-      {/* Sticky Category Bar & Live Search */}
+      {/* 3. Text-Only Category Navigation (Underline active state) */}
       <CategoryNav
         categories={CATEGORIES}
         activeCategory={activeCategory}
         setActiveCategory={setActiveCategory}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
-        itemsCountByCategory={itemsCountByCategory}
-        lang={lang}
       />
 
-      {/* Menu Categories & Items Section */}
+      {/* 4. Editorial Menu Section (Two-column, no card backgrounds) */}
       <MenuSection
         categories={CATEGORIES}
         items={items}
         activeCategory={activeCategory}
-        viewMode={viewMode}
         searchQuery={searchQuery}
         onOpenCustomizer={(item) => setCustomizingItem(item)}
         onQuickAdd={handleQuickAdd}
         cartItems={cartItems}
-        lang={lang}
       />
 
-      {/* Footer Hub */}
+      {/* 5. Minimal Footer */}
       <Footer
         onOpenReservation={() => setIsReservationOpen(true)}
-        lang={lang}
       />
 
-      {/* Floating Bottom Cart Bar (Mobile First & Desktop) */}
+      {/* 6. Sticky Minimal Order Tray (Only visible when items in cart) */}
       {cartCount > 0 && !isCartOpen && (
-        <div className="fixed bottom-0 inset-x-0 z-40 p-3 sm:bottom-6 sm:inset-x-auto sm:left-6 sm:p-0">
-          <button
-            onClick={() => setIsCartOpen(true)}
-            className="w-full sm:w-auto bg-[#c5a059] text-black font-extrabold text-sm py-3.5 px-5 rounded-2xl sm:rounded-full flex items-center justify-between sm:justify-center gap-3 shadow-[0_4px_25px_rgba(0,0,0,0.6)] active:scale-[0.98] transition border border-black/10"
-          >
-            <div className="flex items-center gap-2">
-              <ShoppingBag size={18} />
-              <span>سلة طلباتي ({cartCount})</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="font-black text-base">{cartTotal} ج.م</span>
-              <span className="text-xs bg-black text-[#c5a059] px-2.5 py-1 rounded-full font-bold">
-                إتمام الطلب ←
+        <aside className="fixed bottom-0 inset-x-0 z-40 bg-[#171719]/96 backdrop-blur-md border-t border-white/[0.12] py-3.5 px-4">
+          <div className="container-custom flex items-center justify-between gap-4">
+            <div className="flex items-baseline gap-3">
+              <span className="text-xs sm:text-sm text-[#88847c]">
+                الطلب ({cartCount} أصناف)
+              </span>
+              <span className="font-body text-base sm:text-lg font-semibold text-[#c29d68]">
+                {cartTotal} ج.م
               </span>
             </div>
-          </button>
-        </div>
+
+            <button
+              onClick={() => setIsCartOpen(true)}
+              className="bg-[#c29d68] hover:bg-[#d4b07d] text-[#111112] font-semibold text-xs sm:text-sm py-2 px-5 rounded-sm transition"
+            >
+              إتمام الطلب عبر واتساب &larr;
+            </button>
+          </div>
+        </aside>
       )}
 
-      {/* Item Customizer Modal */}
+      {/* Modals */}
       {customizingItem && (
         <ItemCustomizerModal
           item={customizingItem}
@@ -278,7 +210,6 @@ export default function App() {
         />
       )}
 
-      {/* Cart Drawer */}
       <CartDrawer
         isOpen={isCartOpen}
         onClose={() => setIsCartOpen(false)}
@@ -289,7 +220,6 @@ export default function App() {
         onOpenWaiterView={(order) => setWaiterOrderData(order)}
       />
 
-      {/* Show to Waiter Modal */}
       {waiterOrderData && (
         <WaiterViewModal
           orderData={waiterOrderData}
@@ -297,13 +227,11 @@ export default function App() {
         />
       )}
 
-      {/* Reservation Modal */}
       <ReservationModal
         isOpen={isReservationOpen}
         onClose={() => setIsReservationOpen(false)}
       />
 
-      {/* Admin Drawer */}
       <AdminDrawer
         isOpen={isAdminOpen}
         onClose={() => setIsAdminOpen(false)}
