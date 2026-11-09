@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Phone, 
   MessageCircle, 
@@ -6,7 +6,9 @@ import {
   ShoppingBag, 
   LayoutGrid, 
   List,
-  ShieldCheck
+  ShieldCheck,
+  Menu,
+  X
 } from 'lucide-react';
 
 export default function Navbar({ 
@@ -16,121 +18,138 @@ export default function Navbar({
   cartTotal, 
   onOpenCart, 
   onOpenReservation, 
-  onOpenAdmin,
-  lang 
+  onOpenAdmin 
 }) {
-  const isAr = lang === 'ar';
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-[#0b0b0cd9] backdrop-blur-md border-b border-white/[0.08]">
+    <header className="sticky top-0 z-50 bg-[#0d0d10]/95 backdrop-blur-md border-b border-white/[0.08]">
       <div className="container-custom">
-        <div className="flex items-center justify-between py-3.5">
+        <div className="flex items-center justify-between h-16">
           
-          {/* Logo & Brand */}
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full border border-[#c5a059]/40 bg-[#161619] flex items-center justify-center shadow-sm">
-              <span className="font-brand text-xl font-black text-[#c5a059]">7</span>
+          {/* Brand Logo & Name */}
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-full bg-[#18181c] border border-[#c5a059]/40 flex items-center justify-center shrink-0">
+              <span className="font-brand text-xl font-black text-[#c5a059] leading-none">7</span>
             </div>
-
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-brand text-lg sm:text-xl font-bold tracking-wider text-[#f5f5f7]">
+            <div className="leading-tight">
+              <div className="flex items-center gap-1.5">
+                <span className="font-brand text-lg font-black tracking-wider text-[#f5f5f7]">
                   SEVEN
                 </span>
-                <span className="text-[11px] text-[#a1a1aa] px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/[0.08]">
-                  فرع البدرشين
+                <span className="text-[11px] font-bold text-[#c5a059] px-2 py-0.5 rounded-full bg-[#c5a059]/10 border border-[#c5a059]/20">
+                  البدرشين
                 </span>
               </div>
-              <div className="text-[10px] tracking-widest text-[#71717a] uppercase font-medium">
+              <div className="text-[10px] text-[#8e8e93] font-medium tracking-wide">
                 SPECIALTY COFFEE • CAFÉ
               </div>
             </div>
           </div>
 
-          {/* Actions & Tools */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          {/* Right Action Controls (Mobile Optimized: No overlapping) */}
+          <div className="flex items-center gap-2">
             
-            {/* View Mode Switcher */}
-            <div className="flex items-center bg-[#161619] border border-white/[0.08] rounded-full p-0.5">
+            {/* View Mode Toggle (Cards / List) */}
+            <div className="flex items-center bg-[#18181c] border border-white/[0.08] rounded-full p-1">
               <button
                 onClick={() => setViewMode('cards')}
-                className={`p-1.5 sm:px-2.5 sm:py-1 rounded-full text-xs transition ${
+                className={`p-1.5 rounded-full transition ${
                   viewMode === 'cards'
-                    ? 'bg-[#27272a] text-[#f5f5f7] font-bold'
-                    : 'text-[#71717a] hover:text-[#a1a1aa]'
+                    ? 'bg-[#c5a059] text-black shadow-sm'
+                    : 'text-[#8e8e93] hover:text-[#f5f5f7]'
                 }`}
                 title="عرض البطاقات"
               >
-                <LayoutGrid size={14} />
+                <LayoutGrid size={15} />
               </button>
               <button
                 onClick={() => setViewMode('classic')}
-                className={`p-1.5 sm:px-2.5 sm:py-1 rounded-full text-xs transition ${
+                className={`p-1.5 rounded-full transition ${
                   viewMode === 'classic'
-                    ? 'bg-[#27272a] text-[#f5f5f7] font-bold'
-                    : 'text-[#71717a] hover:text-[#a1a1aa]'
+                    ? 'bg-[#c5a059] text-black shadow-sm'
+                    : 'text-[#8e8e93] hover:text-[#f5f5f7]'
                 }`}
-                title="عرض القائمة الكلاسيكي"
+                title="عرض القائمة"
               >
-                <List size={14} />
+                <List size={15} />
               </button>
             </div>
 
-            {/* Quick Reservation Pill */}
-            <button
-              onClick={onOpenReservation}
-              className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-[#f5f5f7] bg-white/[0.04] border border-white/[0.08] hover:border-[#c5a059]/40 transition"
-            >
-              <CalendarDays size={13} className="text-[#c5a059]" />
-              <span>حجز طاولة</span>
-            </button>
-
-            {/* WhatsApp */}
+            {/* Quick WhatsApp Link */}
             <a
               href="https://wa.me/201128586856"
               target="_blank"
               rel="noreferrer"
-              className="w-8 h-8 rounded-full bg-white/[0.04] border border-white/[0.08] hover:border-emerald-500/40 flex items-center justify-center text-[#a1a1aa] hover:text-emerald-400 transition"
-              title="واتساب: 01128586856"
+              className="w-9 h-9 rounded-full bg-[#18181c] border border-white/[0.08] flex items-center justify-center text-emerald-400 hover:border-emerald-500/40 transition shrink-0"
+              title="واتساب الكافيه"
             >
-              <MessageCircle size={15} />
-            </a>
-
-            {/* Phone Call */}
-            <a
-              href="tel:01128586856"
-              className="w-8 h-8 rounded-full bg-white/[0.04] border border-white/[0.08] hover:border-[#c5a059]/40 flex items-center justify-center text-[#a1a1aa] hover:text-[#c5a059] transition"
-              title="اتصال: 01128586856"
-            >
-              <Phone size={14} />
+              <MessageCircle size={16} />
             </a>
 
             {/* Cart Button */}
             <button
               onClick={onOpenCart}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#c5a059] text-[#0b0b0c] font-bold text-xs hover:bg-[#d8b772] transition"
+              className="h-9 px-3 rounded-full bg-[#c5a059] text-black font-extrabold text-xs flex items-center gap-1.5 shadow-sm active:scale-95 transition shrink-0"
             >
-              <ShoppingBag size={14} />
+              <ShoppingBag size={15} />
               <span>الطلب</span>
               {cartCount > 0 && (
-                <span className="w-4 h-4 rounded-full bg-[#0b0b0c] text-[#c5a059] text-[10px] flex items-center justify-center font-black">
+                <span className="w-5 h-5 rounded-full bg-black text-[#c5a059] text-xs flex items-center justify-center font-black">
                   {cartCount}
                 </span>
               )}
             </button>
 
-            {/* Admin Key */}
+            {/* More Menu Toggle (Mobile) */}
             <button
-              onClick={onOpenAdmin}
-              className="w-8 h-8 rounded-full border border-white/[0.06] flex items-center justify-center text-[#71717a] hover:text-[#c5a059] transition"
-              title="لوحة الإدارة"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="w-9 h-9 rounded-full bg-[#18181c] border border-white/[0.08] flex items-center justify-center text-[#8e8e93] hover:text-[#f5f5f7] transition shrink-0"
             >
-              <ShieldCheck size={14} />
+              {mobileMenuOpen ? <X size={17} /> : <Menu size={17} />}
             </button>
 
           </div>
 
         </div>
+
+        {/* Dropdown Mobile Menu for Extra Tools */}
+        {mobileMenuOpen && (
+          <div className="py-3 px-2 border-t border-white/[0.08] bg-[#121215] rounded-b-2xl animate-in slide-in-from-top-2 duration-200">
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenReservation();
+                }}
+                className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-[#1c1c22] border border-white/[0.08] text-[#f5f5f7] font-bold"
+              >
+                <CalendarDays size={15} className="text-[#c5a059]" />
+                <span>حجز طاولة للمباريات</span>
+              </button>
+
+              <a
+                href="tel:01128586856"
+                className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-[#1c1c22] border border-white/[0.08] text-[#f5f5f7] font-bold"
+              >
+                <Phone size={15} className="text-[#c5a059]" />
+                <span>اتصال: 01128586856</span>
+              </a>
+
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenAdmin();
+                }}
+                className="col-span-2 flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-white/[0.03] text-[#8e8e93] text-[11px]"
+              >
+                <ShieldCheck size={14} />
+                <span>لوحة تحكم وتعديل أسعار الكافيه (Admin)</span>
+              </button>
+            </div>
+          </div>
+        )}
+
       </div>
     </header>
   );

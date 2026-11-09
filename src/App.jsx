@@ -210,17 +210,11 @@ export default function App() {
         setLang={setLang}
       />
 
-      {/* Hero Banner */}
+      {/* Hero Banner with Integrated Match Highlight */}
       <Hero
-        onOpenReservation={() => setIsReservationOpen(true)}
-        onScrollToMenu={handleScrollToMenu}
-        lang={lang}
-      />
-
-      {/* Outdoor Lounge & Live Match Section */}
-      <MatchSection
         matchInfo={matchInfo}
         onOpenReservation={() => setIsReservationOpen(true)}
+        onScrollToMenu={handleScrollToMenu}
         lang={lang}
       />
 
@@ -254,17 +248,25 @@ export default function App() {
         lang={lang}
       />
 
-      {/* Floating Cart Button (shows when items in cart) */}
+      {/* Floating Bottom Cart Bar (Mobile First & Desktop) */}
       {cartCount > 0 && !isCartOpen && (
-        <button
-          onClick={() => setIsCartOpen(true)}
-          className="fixed bottom-6 left-6 z-40 btn-gold text-xs px-4 py-2.5 rounded-full flex items-center gap-2 shadow-lg"
-        >
-          <ShoppingBag size={15} />
-          <span className="font-bold">الطلب ({cartCount})</span>
-          <span>•</span>
-          <span>{cartTotal} ج.م</span>
-        </button>
+        <div className="fixed bottom-0 inset-x-0 z-40 p-3 sm:bottom-6 sm:inset-x-auto sm:left-6 sm:p-0">
+          <button
+            onClick={() => setIsCartOpen(true)}
+            className="w-full sm:w-auto bg-[#c5a059] text-black font-extrabold text-sm py-3.5 px-5 rounded-2xl sm:rounded-full flex items-center justify-between sm:justify-center gap-3 shadow-[0_4px_25px_rgba(0,0,0,0.6)] active:scale-[0.98] transition border border-black/10"
+          >
+            <div className="flex items-center gap-2">
+              <ShoppingBag size={18} />
+              <span>سلة طلباتي ({cartCount})</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="font-black text-base">{cartTotal} ج.م</span>
+              <span className="text-xs bg-black text-[#c5a059] px-2.5 py-1 rounded-full font-bold">
+                إتمام الطلب ←
+              </span>
+            </div>
+          </button>
+        </div>
       )}
 
       {/* Item Customizer Modal */}
